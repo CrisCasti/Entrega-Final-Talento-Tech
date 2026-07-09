@@ -35,3 +35,7 @@ Podés ver el sitio funcionando en producción aquí: [https://criscasti.github.
 * Control mediante JavaScript antes del envío del formulario para asegurar que los campos obligatorios no se envíen vacíos.
 * Validación estricta de estructura de correo electrónico utilizando expresiones regulares (`regex`).
 
+👤 Autor
+Chris Casti - Desarrollo Frontend Completo - @CrisCasti
+
+Proyecto finalizado y presentado bajo el marco del programa Talento Tech 2026.

@@ -1,12 +1,17 @@
-// 1. Declaración de Constantes y Variables Globales
+/* ======================================================= 
+   1. Declaración de Constantes y Variables Globales
+   ======================================================= */ 
+
 const contenedorProductos = document.getElementById("contenedor-productos");
 const listaCarrito = document.getElementById('lista-carrito');
 const botonVaciar = document.getElementById('vaciar-carrito');
 const formularioContacto = document.getElementById('form-contacto');
 
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-   
-// 2. Llamada a la API de Productos
+
+/* ======================================================= 
+   2. Llamada a la API de Productos
+   ======================================================= */    
 async function obtenerProductos() {
     try {
         const respuesta = await fetch('https://fakestoreapi.com/products?limit=6'); 
@@ -22,7 +27,9 @@ async function obtenerProductos() {
     }
 }
 
-// 3. Renderizar productos en la tienda
+/* ======================================================= 
+   3. Renderizar productos en la tienda
+   ======================================================= */ 
 function mostrarProductos(listaProductos) {
     contenedorProductos.innerHTML = '';
 
@@ -41,7 +48,9 @@ function mostrarProductos(listaProductos) {
     });
 }
 
-// 4. Delegación de eventos para Agregar Productos
+/* ======================================================= 
+   4. Delegación de eventos para Agregar Productos
+   ======================================================= */ 
 contenedorProductos.addEventListener('click', (e) => {
     if (e.target.classList.contains('boton')) {
         const idProducto = parseInt(e.target.dataset.id);
@@ -49,7 +58,9 @@ contenedorProductos.addEventListener('click', (e) => {
     }
 });
 
-// 5. Agregar un producto al carrito
+/* ======================================================= 
+   5. Agregar un producto al carrito
+   ======================================================= */ 
 function agregarAlCarrito(idProducto) {
     const productoExistente = carrito.find(item => item.id === idProducto);
 
@@ -67,7 +78,10 @@ function agregarAlCarrito(idProducto) {
     mostrarCarrito();
 }
 
-// 6. Contador Dinámico del Carrito
+/* ======================================================= 
+   6. Contador Dinámico del Carrito
+   ======================================================= */ 
+// 
 function actualizarContadorCarrito() {
     const contador = document.getElementById('contador-carrito');
     if (!contador) return;
@@ -76,7 +90,9 @@ function actualizarContadorCarrito() {
     contador.innerText = totalProductos;
 }
 
-// 7. Dibujar detalle del carrito 
+/* ======================================================= 
+   7. Dibujar detalle del carrito
+   ======================================================= */ 
 function mostrarCarrito() {
     if (!window.productosAPI || !listaCarrito) return;
 
@@ -103,7 +119,7 @@ function mostrarCarrito() {
             divItem.style.padding = '1rem 0';
             divItem.style.borderBottom = '1px solid var(--grisClaro)';
 
-            // Agregamos un botón [X] rojo chico para eliminar el producto individualmente
+            // Agregado de un botón [X] rojo chico para eliminar el producto individualmente
             divItem.innerHTML = `
                 <p style="margin: 0; text-align: left; max-width: 60%;"><strong>${datosProducto.title}</strong> (x${item.cantidad})</p>
                 <div style="display: flex; gap: 1.5rem; align-items: center;">
@@ -130,7 +146,9 @@ function mostrarCarrito() {
     listaCarrito.appendChild(divTotal);
 }
 
-// 8. Escuchar clics para Restar o Eliminar un producto del carrito
+/* ======================================================= 
+   8. Escuchar clics para Restar o Eliminar un producto del carrito
+   ======================================================= */ 
 listaCarrito.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-eliminar')) {
         const idProducto = parseInt(e.target.dataset.id);
@@ -155,7 +173,9 @@ listaCarrito.addEventListener('click', (e) => {
     }
 });
 
-// 9. Vaciar Carrito por Completo
+/* ======================================================= 
+   9. Vaciar Carrito por Completo
+   ======================================================= */  
 if (botonVaciar) {
     botonVaciar.addEventListener('click', () => {
         carrito = []; 
@@ -165,7 +185,9 @@ if (botonVaciar) {
     });
 }
 
-// 10. Validación de Formulario por JS 
+/* ======================================================= 
+   10. Validación de Formulario por JS 
+   ======================================================= */ 
 if (formularioContacto) {
     formularioContacto.addEventListener('submit', function(e) {
         // Buscamos los inputs dentro del formulario
@@ -192,6 +214,8 @@ if (formularioContacto) {
     });
 }
 
-// 11. Ejecuciones Iniciales
+/* ======================================================= 
+   11. Ejecuciones Iniciales
+   ======================================================= */ 
 obtenerProductos();
 actualizarContadorCarrito();
